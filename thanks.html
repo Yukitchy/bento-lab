@@ -25,13 +25,20 @@ h1{font-size:34px;line-height:1.25;margin:0 0 12px}.lead{color:var(--sub);margin
 <span class="stamp" data-ja="お申し込み完了" data-en="YOU'RE IN">お申し込み完了</span>
 <h1 data-ja="ようこそ、Bento Labへ。" data-en="Welcome to Bento Lab.">ようこそ、Bento Labへ。</h1>
 <p class="lead" data-ja="決済が完了しました。レシートはStripeからメールで届きます。使いはじめ方は3つだけ。" data-en="Your payment went through — the receipt arrives by email from Stripe. Getting started takes three steps.">決済が完了しました。レシートはStripeからメールで届きます。使いはじめ方は3つだけ。</p>
-<div class="step"><div class="n">1</div><div><h2 data-ja="メニューから箱を選ぶ" data-en="Pick a box from the menu">メニューから箱を選ぶ</h2><p data-ja="サービスメニューの棚から、使いたい箱のリンクを開くだけ。ログインはありません。" data-en="Open any box from the shelves on the menu page. No login needed.">サービスメニューの棚から、使いたい箱のリンクを開くだけ。ログインはありません。</p></div></div>
-<div class="step"><div class="n">2</div><div><h2 data-ja="自分用の中身がほしい時はメッセージ" data-en="Want your own version? Just message">自分用の中身がほしい時はメッセージ</h2><p data-ja="辞書・話者・作品など「あなた用の中身」を入れた版は、Messengerでひとこと送ってもらえれば作ります。" data-en="If you want a box filled with your own data (glossary, speakers, favorite series), send Yuuki a message and it gets made.">辞書・話者・作品など「あなた用の中身」を入れた版は、Messengerでひとこと送ってもらえれば作ります。</p></div></div>
+<div class="step"><div class="n">1</div><div style="flex:1"><h2 data-ja="キットをダウンロードする" data-en="Download the kit">キットをダウンロードする</h2><p data-ja="録音から議事録と引き継ぎ書を作る一式（手順書・プロンプト5本・辞書テンプレ・検品スクリプト）です。" data-en="Everything for turning a recording into minutes and a handover doc: the guide, five prompts, a glossary template and the checker script.">録音から議事録と引き継ぎ書を作る一式（手順書・プロンプト5本・辞書テンプレ・検品スクリプト）です。</p>
+<a class="btn" id="dl" href="#" style="margin-top:12px" data-ja="キットをダウンロード" data-en="Download the kit">キットをダウンロード</a>
+<p id="dl-note" hidden style="margin-top:10px;font-size:12px;color:var(--sub)" data-ja="このページをお申し込み直後の画面から開くと、ここにダウンロードボタンが出ます。リンクを保存しておくと、あとから何度でも受け取れます。" data-en="Open this page from the screen right after checkout and the download button appears here. Bookmark that link to come back anytime.">このページをお申し込み直後の画面から開くと、ここにダウンロードボタンが出ます。リンクを保存しておくと、あとから何度でも受け取れます。</p>
+</div></div>
+<div class="step"><div class="n">2</div><div><h2 data-ja="メニューから箱を使う" data-en="Use any box from the menu">メニューから箱を使う</h2><p data-ja="メニューの棚から好きな箱を開くだけ。ログインはありません。辞書・話者・作品など「あなた用の中身」を入れた版がほしい時は、Messengerでひとこと送ってください。" data-en="Open any box from the shelves — no login. If you want one filled with your own data (glossary, speakers, favorite series), send Yuuki a message.">メニューの棚から好きな箱を開くだけ。ログインはありません。辞書・話者・作品など「あなた用の中身」を入れた版がほしい時は、Messengerでひとこと送ってください。</p></div></div>
 <div class="step"><div class="n">3</div><div><h2 data-ja="業務で使う時はクレジット1行" data-en="Using it at work? One credit line">業務で使う時はクレジット1行</h2><p data-ja="商用利用OK。かわりに「Made with Bento Lab」の1行を入れてください（メニューページの下にコピーボタンがあります）。" data-en="Commercial use is fine — just keep the “Made with Bento Lab” line (copy button at the bottom of the menu page).">商用利用OK。かわりに「Made with Bento Lab」の1行を入れてください（メニューページの下にコピーボタンがあります）。</p></div></div>
 <a class="btn" href="index.html#shelves" data-ja="メニューを開く" data-en="Open the menu">メニューを開く</a>
 <p class="small" data-ja="解約はいつでも。Stripeのレシートメール内「サブスクリプションを管理」から本人が即時に止められます。" data-en="Cancel anytime: the “Manage subscription” link in your Stripe receipt email stops it instantly.">解約はいつでも。Stripeのレシートメール内「サブスクリプションを管理」から本人が即時に止められます。</p>
 </main>
 <script>
 function setLang(l){document.documentElement.lang=l;document.querySelectorAll('[data-ja]').forEach(e=>e.textContent=e.dataset[l]);document.getElementById('lang-ja').classList.toggle('active',l==='ja');document.getElementById('lang-en').classList.toggle('active',l==='en')}
+const sid = new URLSearchParams(location.search).get('session_id') || '';
+const dl = document.getElementById('dl');
+if(/^cs_/.test(sid)){ dl.href = 'https://kit.animesenseijp.com/kit?session_id=' + encodeURIComponent(sid); }
+else { dl.hidden = true; document.getElementById('dl-note').hidden = false; }
 if(/^en/.test(navigator.language)||location.hash==='#en')setLang('en');
 </script></body></html>

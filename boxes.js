@@ -64,7 +64,7 @@ const BOXES = [
     {t:"録音をドロップして話者を登録",d:"バーミヤンで録った60分のm4aを受付に放り込み、話者3人の名前と立場を入れて「受け付ける」。あとは待つだけ。",img:"art/flow/step1.jpg"},
     {t:"まとめが自動で出る",d:"3行サマリー・ハイライト・決定事項・TODO・出たアイデアまで1枚に。LINEに直貼りできるテキスト版も同時に出る。",img:"art/flow/step2.jpg"},
     {t:"対談の読み物ページになる",d:"同じ録音が、見出し付きのインタビュー記事に。参加者に送れば「あの話どこだっけ」が無くなる。",img:"art/flow/step3.jpg"}]},examples:[
-    {name:"音声レジュメ生成キット（配布物）",url:null,note:null},
+    {name:"音声レジュメ生成キット（申し込み後にダウンロード）",url:null,note:null},
     {name:"書き手の立場＝税務",url:null,note:null},
     {name:"コンサル",url:null,note:null},
     {name:"第三者（既定）",url:null,note:null},

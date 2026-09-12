@@ -61,7 +61,7 @@ const rows = priv.length?`<div class="ex">${priv.map(e=>`<div class="row"><div><
 const flow = b.flow ? `<section><h2>使い方の流れ</h2><p style="margin:0 0 12px;font-size:13px;color:var(--sub)">${b.flow.title}</p><div class="flow">${b.flow.steps.map((st,k)=>`<div class="fs"><a href="${st.img}" target="_blank" rel="noopener"><img src="${st.img}" alt="" loading="lazy"></a><div class="fb"><span class="n">${k+1}</span><b>${st.t}</b><p>${st.d}</p></div></div>`).join('')}</div></section>` : '';
 const kit = b.isKit ? `<section><h2>セットの中身（zipで渡します）</h2><div class="kit">録音ファイルを、あなたのClaude/Geminiで「まとめ」「引き継ぎ書」「読み物」に変えるための一式。ユウキ専用の設定は抜いてあり、辞書と話者と立場を差し替えるだけで自分用になります。
 <ul><li>README（手順書）と START（AIに貼る起動プロンプト）</li><li>プロンプト5本: 文字起こし／まとめ／引き継ぎ書（判断基準の抽出）／記事化／検品</li><li>固有名詞辞書テンプレ（CSV）と話者・立場の設定ファイル</li><li>検品スクリプト（辞書置換＋チェック・追加インストール不要）</li></ul>
-<p style="margin:14px 0 0;font-size:13px;color:var(--sub)">受け取り方: お申し込み後、Messengerかメールでzipをお送りします。更新版が出たら同じ経路で届きます。</p></div></section>` : '';
+<p style="margin:14px 0 0;font-size:13px;color:var(--sub)">受け取り方: お申し込みが終わった画面にダウンロードボタンが出ます。そのリンクを保存しておけば、あとから何度でも受け取れます。</p></div></section>` : '';
 document.getElementById('app').innerHTML = `
 <div class="top">
   <div class="art" style="border-bottom-color:${color}"><img src="art/thumbs/${i}.jpg" alt=""></div>
