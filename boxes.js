@@ -69,4 +69,20 @@ const BOXES = [
     {name:"コンサル",url:null,note:null},
     {name:"第三者（既定）",url:null,note:null},
   ]},
+  {box:"覚えたいことを|クイズにして配る",en:"Turn anything into a quiz you can hand out",desc:"教材や行き先をクイズに変換。相手はリンクを開くだけ",cat:"学ぶ",badge:"free",examples:[
+    {name:"ひらがなクエスト（生徒向け）",url:"https://quiz.animesenseijp.com/mason-52f3/hiragana/",note:"日本語レッスンの復習"},
+    {name:"東京ミッション（ツアーゲスト向け）",url:"https://quiz.animesenseijp.com/darren-a65c/tokyo/",note:"行き先を探す指令書に"},
+  ]},
+  {box:"毎日少しずつ|覚えて忘れない",en:"Learn a little every day and keep it",desc:"忘れかけた頃に出し直す。続けられる分だけ毎日出る",cat:"学ぶ",badge:null,examples:[
+    {name:"Kanji Dojo（漢字の道場）",url:"https://yukitchy.github.io/kanji-dojo/",note:"WaniKani型の漢字SRS"},
+  ]},
+  {box:"通った店の記録を|貯めて見せる",en:"Log the places you go and show them off",desc:"訪れた場所を写真と一言で貯め、1ページの記録にする",cat:"暮らし",badge:null,examples:[
+    {name:"バックルームズ サ活（サウナ記録）",url:"https://yukitchy.github.io/sakatsu/",note:null},
+  ]},
+  {box:"作ったものを|棚に並べて見せる",en:"Line up what you made on one shelf",desc:"自作のツールや作品を1ページに並べ、人に渡せる形にする",cat:"仕事",badge:null,examples:[
+    {name:"ユウキのダッシュボード図鑑",url:"https://yukitchy.github.io/yuki-dashboards/",note:"自作14個を一望"},
+  ]},
+  {box:"相手に刺さる提案を|LP1枚にまとめる",en:"Put a pitch on one page",desc:"提案を1ページにまとめて渡す。口頭より伝わる",cat:"仕事",badge:null,examples:[
+    {name:"知人向けの提案LP",url:"https://yukitchy.github.io/yoshi-teian/",note:null},
+  ]},
 ];
