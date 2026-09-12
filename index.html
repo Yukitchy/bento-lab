@@ -1,0 +1,493 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bento Lab</title>
+<meta name="description" content="ユウキが作った便利Webツールを月500円で使い放題。Bento Labのサービスメニュー。">
+<meta property="og:title" content="Bento Lab">
+<meta property="og:description" content="ユウキが作った便利Webツールを月500円で使い放題。Bento Labのサービスメニュー。">
+<meta property="og:image" content="art/motif/favicon-512.png">
+<link rel="icon" type="image/png" sizes="32x32" href="art/motif/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="art/motif/favicon-512.png">
+<link rel="apple-touch-icon" href="art/motif/favicon-180.png">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script>
+  // Stripeの支払いリンクが出来たらここを書き換える
+  const STRIPE_LINK = "#pricing";
+</script>
+<style>
+:root{--ink:#1c1c1e;--sub:#5b5b60;--white:#fff;--fog:#f6f4f1;--silver:#e3e0dc;--red:#e43024;--green:#2fa83c;--pink:#fc5484;--purple:#9054c0;--blue:#0084cc;--yellow:#ffc400;--orange:#f4761f}
+*{box-sizing:border-box}
+html,body{overflow-x:hidden}
+body{margin:0;background:var(--white);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;font-weight:400;line-height:1.7}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:"Zen Kaku Gothic New";font-weight:900;letter-spacing:-.01em}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.nw{white-space:nowrap}
+
+/* header */
+header{background:var(--ink)}
+.hd{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1160px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:10px}
+.logo .sq{width:36px;height:36px;background:var(--red);border:2.5px solid #111113;border-radius:9px;padding:4px;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr 1fr;gap:3px;box-shadow:0 0 0 1.5px rgba(255,255,255,.16)}
+.logo .sq i{display:block;border-radius:2px}
+.logo .sq i:nth-child(1){background:#fff}
+.logo .sq i:nth-child(2){background:var(--green)}
+.logo .sq i:nth-child(3){background:var(--pink)}
+.logo .sq i:first-child{grid-row:1 / span 2}
+.logo b{font-size:19px;color:#fff}
+.btn{display:inline-block;border-radius:999px;padding:12px 24px;font-weight:700;background:var(--red);color:#fff;font-size:14px;border:none;cursor:pointer;font-family:inherit;white-space:nowrap}
+.btn:hover{background:#c8261c}
+
+/* hero */
+.hero{background:var(--white);padding:64px 24px 0;position:relative;overflow:hidden}
+.hero > .ticker-band{max-width:1080px;margin-left:auto;margin-right:auto}
+.hero .wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.hero-left{max-width:500px}
+.hero-left h1{font-size:clamp(40px,6vw,72px);line-height:1.28;margin:0 0 14px;font-family:"Zen Kaku Gothic New";font-weight:900}
+.hero-left p{font-size:14px;color:var(--sub);margin:0 0 22px}
+.hero-right{position:relative;flex-shrink:0;margin:-40px -20px -40px 0;width:min(620px,52vw);z-index:0}
+.hero-right img{display:block;width:100%;height:auto}
+.hero-left{position:relative;z-index:1}
+
+/* ticker */
+.ticker-band{background:var(--ink);padding:12px 0;margin:36px 0 0;overflow:hidden;position:relative;border-radius:999px;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 40px),transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 40px),transparent 100%)}
+.ticker-wrap{overflow:hidden;position:relative;width:100%}
+.ticker-wrap{cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.ticker-wrap *{-webkit-user-drag:none;user-drag:none}
+.ticker-wrap.dragging{cursor:grabbing}
+.ticker-content{display:flex;gap:20px;animation:ticker 22s linear infinite;white-space:nowrap;padding:0 24px;will-change:transform}
+.ticker-wrap.dragging .ticker-content,.ticker-wrap:hover .ticker-content{animation-play-state:paused}
+a.ticker-pill{background:#fff;color:var(--ink);padding:6px 14px;border-radius:999px;font-size:11px;font-weight:700;flex-shrink:0;letter-spacing:.04em;text-decoration:none;transition:background .15s ease,color .15s ease}
+a.ticker-pill:hover{background:var(--red);color:#fff}
+@keyframes ticker{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+.pkg{scroll-margin-top:90px}
+.pkg.flash{outline:3px solid var(--red);outline-offset:3px;border-radius:12px}
+
+/* bento box */
+.bento{width:560px;max-width:100%;position:relative}
+.bento-box{background:var(--orange);border-radius:22px;padding:14px;box-shadow:0 30px 60px rgba(0,0,0,.18);transform:rotate(-3deg);position:relative}
+.bento-base{background:#fff7e6;border-radius:12px;padding:14px;display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;grid-template-areas:"a b c" "a d e"}
+.bento-slot{background:#fff;border-radius:10px;box-shadow:inset 0 3px 6px rgba(0,0,0,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center}
+.bento-slot:nth-child(1){grid-area:a}
+.bento-slot:nth-child(2){grid-area:b}
+.bento-slot:nth-child(3){grid-area:c}
+.bento-slot:nth-child(4){grid-area:d}
+.bento-slot:nth-child(5){grid-area:e}
+.bento-badge{width:64px;height:64px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:36px;font-family:"Zen Kaku Gothic New";margin-bottom:6px}
+.bento-slot:nth-child(1) .bento-badge{background:var(--blue)}
+.bento-slot:nth-child(2) .bento-badge{background:var(--orange)}
+.bento-slot:nth-child(3) .bento-badge{background:var(--yellow);color:var(--ink)}
+.bento-slot:nth-child(4) .bento-badge{background:var(--blue)}
+.bento-slot:nth-child(5) .bento-badge{background:var(--orange)}
+.bento-label{font-size:12px;font-weight:700;color:var(--ink)}
+.bento-lid{position:absolute;top:-70px;right:-40px;width:560px;height:90px;background:var(--yellow);border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(6deg);z-index:0}
+.bento-lid-title{font-size:22px;font-weight:900;color:var(--ink)}
+.bento-lid-sub{font-size:12px;font-weight:700;color:var(--ink)}
+
+@media(max-width:768px){
+  .bento{width:100%;max-width:100%}
+  .bento-box{padding:12px}
+  .bento-base{padding:10px;gap:8px}
+  .bento-badge{width:48px;height:48px;font-size:28px}
+  .bento-label{font-size:11px}
+  .bento-lid{width:100%;right:0;top:-60px;height:80px;border-radius:18px}
+  .bento-lid-title{font-size:18px}
+  .bento-lid-sub{font-size:11px}
+}
+
+@media(max-width:768px){.hero{padding:28px 18px 26px}.hero .wrap{display:block;position:relative}.hero-left{max-width:none}.hero-left h1{font-size:clamp(28px,7.8vw,38px);max-width:66%}.hero-left p{max-width:100%}.hero-right{display:block;position:absolute;top:-18px;right:-16px;width:56%;max-width:none;margin:0;transform:none;z-index:0;opacity:1}.hero-right img{display:block;width:100%;height:auto}.hero-left h1,.hero-left p,.hero-left .btn{position:relative;z-index:1}}
+
+/* shelves */
+.shelves{padding:28px 0 20px}
+.shelf{margin-bottom:44px}
+.shelf-head{display:flex;align-items:center;justify-content:space-between;padding:0 24px;max-width:1160px;margin:0 auto 14px}
+.shelf-head h2{font-size:20px;margin:0}
+.arrows{display:flex;gap:8px}
+.arrows button{width:34px;height:34px;border-radius:999px;border:1px solid var(--silver);background:#fff;cursor:pointer;font-size:14px;font-weight:900;color:var(--ink)}
+.arrows button:hover{background:var(--fog)}
+.rail{display:flex;gap:16px;overflow-x:auto;padding:6px 24px 14px;scroll-behavior:smooth}
+.rail::-webkit-scrollbar{height:8px}
+.rail::-webkit-scrollbar-thumb{background:var(--silver);border-radius:8px}
+.pkg{flex:none;width:190px;background:#fff;border-radius:8px;overflow:hidden;border:1px solid var(--silver)}
+.pkg-top{height:142px;position:relative;border-bottom:5px solid;background:#f6f4f1}
+.pkg-top img{width:100%;height:100%;object-fit:cover;display:block}
+.pkg-top .big{color:#fff;font-size:64px;font-weight:900}
+.pkg-badge{position:absolute;top:8px;left:8px;background:var(--yellow);color:var(--ink);font-size:10px;font-weight:900;padding:4px 10px;border-radius:0;letter-spacing:.04em}
+.pkg-bottom{padding:14px}
+.pkg-bottom .name{font-size:14px;font-weight:700;line-height:1.4;margin-bottom:8px;min-height:40px}
+.pkg-bottom .setlabel{font-size:10px;color:var(--sub);margin-bottom:4px}
+.pkg-bottom .set{font-size:11px;color:var(--sub);line-height:1.6}
+
+/* pricing */
+.pricing{padding:60px 24px;background:var(--fog)}
+.pricepkg{max-width:420px;margin:0 auto;background:#fff;border-radius:8px;border:1px solid var(--silver);padding:36px 28px;text-align:center;position:relative}
+.ribbon{position:absolute;top:-14px;left:24px;background:var(--yellow);color:var(--ink);font-weight:900;font-size:12px;padding:6px 16px;border-radius:0}
+.pricepkg .num{font-size:52px;font-weight:900;display:block}
+.pricepkg .num small{font-size:18px;font-weight:700}
+.plist{list-style:none;padding:0;margin:20px 0 26px;text-align:left;font-size:13.5px;color:var(--sub)}
+.plist li{padding:8px 0;border-top:1px solid var(--silver)}
+.plist li:before{content:"・"}
+
+/* faq */
+.faq{padding:20px 24px 64px;max-width:760px;margin:0 auto}
+.faq h2{font-size:22px;margin-bottom:16px}
+details{background:#fff;border:1px solid var(--silver);border-radius:8px;padding:16px 20px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;font-size:14.5px}
+details p{color:var(--sub);font-size:13.5px;margin:10px 0 0}
+
+footer{padding:40px 24px;text-align:center;font-size:12px;color:var(--sub)}
+footer .flinks{display:flex;gap:18px;justify-content:center;margin-bottom:10px;font-weight:700}
+footer .flinks a:hover{color:var(--red)}
+
+/* lang toggle */
+.head-right{display:flex;align-items:center;gap:8px}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.25);border-radius:999px;overflow:hidden;flex-shrink:0}
+.lang-toggle button{border:none;background:transparent;padding:7px 13px;font-size:12px;font-weight:700;cursor:pointer;color:#fff;font-family:inherit;opacity:.6}
+.lang-toggle button.active{opacity:1;background:rgba(255,255,255,.16)}
+@media(max-width:480px){
+  .hd{padding:12px 14px;gap:8px}
+  .logo b{font-size:15px}
+  .logo .sq{width:28px;height:28px}
+  .head-right{gap:6px}
+  .lang-toggle button{padding:6px 9px;font-size:11px}
+  #cta-header{padding:10px 14px;font-size:12px}
+}
+
+/* hako 3card */
+.hako{padding:20px 24px 8px;max-width:1160px;margin:0 auto}
+.hako h2{font-size:22px;margin:0 0 18px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:700px){.three{grid-template-columns:1fr}}
+.hcard{background:#fff;border:1px solid var(--silver);border-radius:8px;padding:22px 20px}
+.hcard h3{font-size:15px;margin:0 0 8px}
+.hcard p{color:var(--sub);font-size:13px;margin:0}
+
+/* credit */
+.credit{padding:8px 24px 44px;max-width:760px;margin:0 auto}
+.credit h2{font-size:22px;margin:0 0 10px}
+.credit > p{color:var(--sub);font-size:13.5px;margin:0 0 16px}
+.credit-box{background:var(--fog);border:1px solid var(--silver);border-radius:8px;padding:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.credit-box code{flex:1;min-width:0;font-size:12.5px;background:#fff;padding:9px 12px;border-radius:6px;overflow-x:auto;white-space:nowrap;border:1px solid var(--silver)}
+.credit-copy{border:none;background:var(--ink);color:#fff;border-radius:999px;padding:9px 16px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
+
+/* badge */
+.badge{position:fixed;right:16px;bottom:16px;background:#fff;border:1px solid var(--silver);border-radius:999px;padding:8px 14px;font-size:12px;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.12);cursor:pointer;z-index:50;color:var(--ink)}
+</style></head>
+<body id="top">
+<header><div class="hd">
+  <div class="logo"><div class="sq" aria-hidden="true"><i></i><i></i><i></i></div><b>Bento Lab</b></div>
+  <div class="head-right">
+    <div class="lang-toggle">
+      <button id="lang-ja" class="active" onclick="setLang('ja')">JA</button>
+      <button id="lang-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a class="btn" id="cta-header" href="#pricing" data-ja="¥500/月ではじめる" data-en="Start — ¥500/mo">¥500/月ではじめる</a>
+  </div>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="hero-left">
+    <h1 data-ja='<span class="nw">便利ツール、</span><span class="nw">月500円で</span><span class="nw">使い放題。</span>' data-en='<span class="nw">All my little tools.</span> <span class="nw">¥500 a month.</span>'><span class="nw">便利ツール、</span><span class="nw">月500円で</span><span class="nw">使い放題。</span></h1>
+    <p data-ja="ユウキが自分のために作った小さなWebツールを、そのまま箱に入れて渡します。毎月ツールが増えるメニュー表つき。" data-en="Small web tools I built for myself, handed to you in one box. Comes with a menu that grows every month.">ユウキが自分のために作った小さなWebツールを、そのまま箱に入れて渡します。毎月ツールが増えるメニュー表つき。</p>
+    <a class="btn" id="cta-hero" href="#pricing" data-ja="¥500/月ではじめる" data-en="Start — ¥500/mo">¥500/月ではじめる</a>
+  </div>
+  <div class="hero-right">
+    <div id="hero-art">
+      <div class="bento">
+        <div class="bento-box">
+          <div class="bento-base">
+            <div class="bento-slot"><div class="bento-badge">好</div><div class="bento-label">語学</div></div>
+            <div class="bento-slot"><div class="bento-badge">推</div><div class="bento-label">聖地ガイド</div></div>
+            <div class="bento-slot"><div class="bento-badge">初</div><div class="bento-label">初来日</div></div>
+            <div class="bento-slot"><div class="bento-badge">チ</div><div class="bento-label">チケット</div></div>
+            <div class="bento-slot"><div class="bento-badge">旅</div><div class="bento-label">旅のしおり</div></div>
+          </div>
+        </div>
+        <div class="bento-lid">
+          <div class="bento-lid-title">Bento Lab</div>
+          <div class="bento-lid-sub">17 TOOLS INSIDE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ticker-band">
+  <div class="ticker-wrap">
+    <div class="ticker-content" id="ticker"></div>
+  </div>
+</div></div>
+
+<div class="shelves" id="shelves"></div>
+
+<div class="hako">
+  <h2 data-ja="箱のしくみ" data-en="How the Box Works">箱のしくみ</h2>
+  <div class="three">
+    <div class="hcard">
+      <h3 data-ja="箱は共通" data-en="One Shared Box">箱は共通</h3>
+      <p data-ja="直しが1か所で全部に効く" data-en="One fix reaches every tool at once">直しが1か所で全部に効く</p>
+    </div>
+    <div class="hcard">
+      <h3 data-ja="中身はあなたの分" data-en="Your Own Contents">中身はあなたの分</h3>
+      <p data-ja="辞書・話者・立場だけ差し替え。誰のデータか混ざらない" data-en="Only your dictionary and settings differ — data never mixes">辞書・話者・立場だけ差し替え。誰のデータか混ざらない</p>
+    </div>
+    <div class="hcard">
+      <h3 data-ja="前の版に戻せる" data-en="Roll Back Anytime">前の版に戻せる</h3>
+      <p data-ja="更新に失敗しても版で戻す" data-en="If an update breaks, roll back to the last version">更新に失敗しても版で戻す</p>
+    </div>
+  </div>
+</div>
+
+<div class="pricing" id="pricing">
+  <div class="pricepkg">
+    <div class="ribbon">NEW</div>
+    <span class="num">¥500 <small data-ja="/月" data-en="/mo">/月</small></span>
+    <ul class="plist" id="plist"></ul>
+    <a class="btn" id="cta-pricing" href="#pricing" data-ja="¥500/月ではじめる" data-en="Start — ¥500/mo">¥500/月ではじめる</a>
+    <p class="price-note" style="font-size:12px;color:var(--sub);margin-top:16px" data-ja="いつでも解約できます。商用利用OK・ただしクレジット表記が必要（下記）" data-en="Cancel anytime. Commercial use OK — a credit line is required (see below).">いつでも解約できます。商用利用OK・ただしクレジット表記が必要（下記）</p>
+  </div>
+</div>
+
+<div class="credit">
+  <h2 data-ja="商用利用とクレジット" data-en="Commercial Use & Credit">商用利用とクレジット</h2>
+  <p data-ja="業務でも使ってOK。かわりに画面のすみに「Made with Bento Lab」が自動で入ります（この1行を貼るだけ。消すと利用規約違反）" data-en="Use it in your business freely. In exchange, a small &quot;Made with Bento Lab&quot; badge appears automatically — just paste this one line (removing it breaks the terms).">業務でも使ってOK。かわりに画面のすみに「Made with Bento Lab」が自動で入ります（この1行を貼るだけ。消すと利用規約違反）</p>
+  <div class="credit-box">
+    <code id="credit-snippet">&lt;script src="https://yukitchy.github.io/bento-lab/credit.js"&gt;&lt;/script&gt;</code>
+    <button class="credit-copy" onclick="copyCredit()" data-ja="コピー" data-en="Copy">コピー</button>
+  </div>
+</div>
+
+<div class="faq">
+  <h2 data-ja="よくある質問" data-en="FAQ">よくある質問</h2>
+  <div id="faqwrap"></div>
+</div>
+
+<footer>
+  <div class="flinks">
+    <a href="#" data-ja="X（準備中）" data-en="X (coming soon)">X（準備中）</a>
+    <a href="#" data-ja="YouTube（準備中）" data-en="YouTube (coming soon)">YouTube（準備中）</a>
+  </div>
+  <div>Bento Lab</div>
+  <div>© 2026 Bento Lab</div>
+</footer>
+
+<a class="badge" href="#top" data-ja="Made with Bento Lab" data-en="Made with Bento Lab">Made with Bento Lab</a>
+
+<script>
+const HERO_IMAGE = "art/motif/hero-bento-cut.png";
+const BOXES = [
+  {box:"好きな作品で|語学を続ける",en:"Keep up a language with what you love",desc:"好きな作品のセリフでAB再生・録音・発音練習",cat:"学ぶ",badge:"free",featured:true,heroChar:"語",examples:[
+    {name:"北斗の拳で日本語",url:"https://yukitchy.github.io/hokuto-nihongo/",note:"体験レッスン教材"},
+    {name:"フリーレンで日本語",url:"https://yukitchy.github.io/hokuto-nihongo/frieren/",note:"生徒向け別作品版"},
+    {name:"英語版（子ども向け）",url:"https://yukitchy.github.io/sota-english-gym/",note:"同じ箱で英語"},
+  ]},
+  {box:"推しの聖地で|案内してくれる人を|探す",en:"Find a local guide for your fandom",desc:"街ではなく「好きな作品」で現地ガイドを探せる名鑑",cat:"旅・遠征",badge:null,featured:true,heroChar:"推",examples:[
+    {name:"アニメ聖地ガイド名鑑 OshiGuide",url:"https://yukitchy.github.io/oshi-guide/",note:null},
+  ]},
+  {box:"初めての国に着く前に|迷いを消す",en:"Arrive ready for a first trip",desc:"渡航前チェックと到着日の動き方を冒険の書の形で",cat:"旅・遠征",badge:null,featured:true,heroChar:"初",examples:[
+    {name:"Japan: First Quest",url:"https://home.yuukipodcast.com/first-quest.html",note:"ツアーゲスト向け英語版"},
+    {name:"家族5人の東京到着日プラン",url:"https://yukitchy.github.io/tokyo-arrival-day/",note:null},
+    {name:"生徒向け来日サポート版（個別・非公開）",url:null,note:null},
+  ]},
+  {box:"旅の予定を1枚に|まとめて共有する",en:"Share the whole trip on one page",desc:"行程・宿・交通・持ち物を1ページに。遠征にも",cat:"旅・遠征",badge:null,examples:[
+    {name:"熊本サウナ旅",url:"https://yukitchy.github.io/kumamoto-sauna/",note:null},
+    {name:"ブルーノ・マーズ札幌公演の遠征ガイド",url:"https://yukitchy.github.io/bruno-mars-guide/",note:null},
+    {name:"マンガ好きの7日間ツアー提案",url:"https://yukitchy.github.io/manga-week/",note:null},
+    {name:"生徒の海外遠征版",url:"https://yukitchy.github.io/lance-flight-plan/",note:null},
+  ]},
+  {box:"チケット購入ヘルプ",en:"Help choosing seats before you buy",desc:"席番号を入れると見え方と見切れが分かる。買う前の迷いを消す",cat:"旅・遠征",badge:"free",featured:true,heroChar:"席",examples:[
+    {name:"ZOZOマリンスタジアム版",url:"https://yukitchy.github.io/zozo-seat-guide/",note:null},
+  ]},
+  {box:"街歩きを|撮影ミッションにして|記事にする",en:"Turn a walk into photo missions",desc:"スポットを撮影ミッション化。撮った写真が記事の枠に入る",cat:"旅・遠征",badge:null,examples:[
+    {name:"秋葉原48スポット",url:"https://quest.animesenseijp.com",note:null},
+  ]},
+  {box:"手が離せない作業を|声で案内する",en:"Hands-free voice guidance",desc:"数字を1つ入れると時間と量を計算して読み上げる",cat:"暮らし",badge:null,examples:[
+    {name:"コーヒーのポアオーバー Drip Zine",url:"https://yukitchy.github.io/drip-zine/",note:null},
+  ]},
+  {box:"自分に合うものを|診断で見つける",en:"Find what fits you with a quiz",desc:"質問に答えるとタイプやおすすめが出る診断ページ",cat:"学ぶ",badge:"free",featured:true,heroChar:"診",examples:[
+    {name:"AI相棒設定診断",url:"https://yukitchy.github.io/ai-party-shindan/",note:null},
+    {name:"ラジオ128回からおすすめ回診断",url:"https://taiken.yuukipodcast.com",note:null},
+  ]},
+  {box:"日程調整を|一言で終わらせる",en:"Settle a date with one question",desc:"空き時間から候補を出して発行。相手はタップするだけ",cat:"仕事",badge:"paid",examples:[
+    {name:"飲み会・打ち合わせ・収録の3プリセット",url:"https://yukitchy.github.io/itsunara/admin.html",note:null},
+  ]},
+  {box:"やる気の出ないタスクを|クエストにする",en:"Turn chores into quests",desc:"やることをクエスト受注書に変える掲示板",cat:"暮らし",badge:"paid",examples:[
+    {name:"モンハン風クエスト掲示板",url:"https://yukitchy.github.io/quest-board/",note:null},
+  ]},
+  {box:"三行だけの日記を|続ける",en:"Keep a three-line diary",desc:"良いことを三行だけ書き残す日記サイト",cat:"暮らし",badge:"free",examples:[
+    {name:"三行褒め日記",url:"https://yukitchy.github.io/home-nikki/",note:null},
+  ]},
+  {box:"落ち込んだ時に|波が引くのを待つ",en:"Ride out a low mood",desc:"落ち込みを「いつか波は引く」前提で受け止める",cat:"暮らし",badge:null,examples:[
+    {name:"ナギ",url:"https://yukitchy.github.io/nagi/lp.html",note:null},
+  ]},
+  {box:"近所の困りごとを記録して|交渉材料にする",en:"Log neighborhood issues as evidence",desc:"苦情を記録に変えて対案にする仕組み",cat:"暮らし",badge:null,examples:[
+    {name:"民泊の近所ホットライン",url:"https://yukitchy.github.io/minpaku-hotline/",note:null},
+  ]},
+  {box:"見つけた良いデザインを貯めて|自分の基準にする",en:"Bank good design into your own rules",desc:"街で見た良いデザインを撮って貯め、原則に育てる",cat:"仕事",badge:"paid",examples:[
+    {name:"デザインバンク",url:"https://design.animesenseijp.com",note:null},
+  ]},
+  {box:"自分の番組を|1ページで聴かせる",en:"One page to play all your shows",desc:"配信中の番組を1ページに並べて聴ける",cat:"Podcast",badge:"free",examples:[
+    {name:"ユウキの7番組",url:"https://program.yuukipodcast.com",note:null},
+  ]},
+  {box:"音声を読み物にして|後から読む",en:"Turn audio into readable pages",desc:"音声や字幕をハイライト付きの読み物に製本",cat:"Podcast",badge:"paid",examples:[
+    {name:"Podcast文庫（9番組532話）",url:"https://bunko.animesenseijp.com/be6f59d7c068/",note:null},
+    {name:"会議字幕の読み物棚",url:"https://bot.animesenseijp.com/yomimono/dana-bf662accc590/",note:null},
+  ]},
+  {box:"録音から|議事録と引き継ぎ書を作る",en:"Minutes and handover docs from a recording",desc:"録音1本→まとめ→読み物。辞書と話者と立場を差し替える",cat:"仕事",badge:"paid",isKit:true,examples:[
+    {name:"書き手の立場＝税務",url:null,note:null},
+    {name:"コンサル",url:null,note:null},
+    {name:"第三者（既定）",url:null,note:null},
+  ]},
+];
+
+function initial(name){
+  const m = name.match(/^[A-Za-z]+/);
+  if(m) return m[0].slice(0,2).toUpperCase();
+  return name.slice(0,1);
+}
+function nowrapName(b){
+  return b.box.split('|').map(t=>`<span class="nw">${t}</span>`).join('');
+}
+function badgeText(b){
+  if(b.isKit) return "定期便に含まれる";
+  if(b.badge==='free') return "無料で試せる";
+  if(b.badge==='paid') return "定期便で使える";
+  return "";
+}
+
+// Ticker setup
+const tickerEl = document.getElementById('ticker');
+const pills = BOXES.map((b,i) => `<a class="ticker-pill" draggable="false" href="#box-${i}">${b.box.replace(/\|/g,'')}</a>`).join('');
+tickerEl.innerHTML = pills + pills;
+// drag / swipe to scrub the ticker
+(function(){
+  const wrap = tickerEl.parentElement; let down=false, startX=0, base=0, moved=0, lastScrubAt=0;
+  const width = () => tickerEl.scrollWidth/2;
+  function setX(v){ base = ((v % width()) + width()) % width(); tickerEl.style.transform = `translateX(${-base}px)`; }
+  function begin(x){ down=true; moved=0; startX=x; wrap.classList.add('dragging');
+    const m = new DOMMatrixReadOnly(getComputedStyle(tickerEl).transform); base = -m.m41;
+    tickerEl.style.animation='none'; setX(base); }
+  function move(x){ if(!down) return; const d = startX - x; if(Math.abs(d)>0){ moved += Math.abs(d); lastScrubAt = performance.now(); } setX(base + d); startX = x; }
+  function end(){ if(!down) return; down=false; wrap.classList.remove('dragging');
+    const pct = (base / width()) * 50;
+    tickerEl.style.transform=''; tickerEl.style.animation='';
+    tickerEl.style.animationDelay = `-${(pct/50)*22}s`; setTimeout(()=>{ moved = 0; }, 320); }
+  // trackpad two-finger swipe (horizontal wheel)
+  let wheelTimer=null;
+  wrap.addEventListener('wheel', e=>{
+    const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0;
+    if(!dx) return;
+    e.preventDefault();
+    if(!wheelTimer){ const m = new DOMMatrixReadOnly(getComputedStyle(tickerEl).transform); base = -m.m41; tickerEl.style.animation='none'; }
+    moved += Math.abs(dx); lastScrubAt = performance.now();
+    setX(base + dx);
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(()=>{ wheelTimer=null; const pct=(base/width())*50;
+      tickerEl.style.transform=''; tickerEl.style.animation='';
+      tickerEl.style.animationDelay = `-${(pct/50)*22}s`;
+      setTimeout(()=>{ moved=0; }, 320); }, 160);
+  }, {passive:false});
+  wrap.addEventListener('dragstart', e=>e.preventDefault());
+  wrap.addEventListener('pointerdown', e=>{ if(e.button!==undefined && e.button!==0) return; e.preventDefault(); begin(e.clientX); try{wrap.setPointerCapture(e.pointerId);}catch(_){} });
+  wrap.addEventListener('pointermove', e=>{ if(down){ e.preventDefault(); move(e.clientX);} });
+  wrap.addEventListener('pointerup', end); wrap.addEventListener('pointercancel', end);
+  wrap.addEventListener('click', e=>{ if(moved>6 && performance.now()-lastScrubAt < 220){ e.preventDefault(); e.stopPropagation(); } moved=0; }, true);
+})();
+// highlight the target card when a pill is followed
+window.addEventListener('hashchange', flashTarget);
+function flashTarget(){ const el = document.querySelector(location.hash||'#none'); if(!el) return;
+  document.querySelectorAll('.pkg.flash').forEach(n=>n.classList.remove('flash'));
+  const rail = el.closest('.rail');
+  if(rail && rail.scrollWidth > rail.clientWidth){ rail.scrollTo({left: Math.max(0, el.offsetLeft - 24), behavior:'smooth'}); }
+  const target = el.getBoundingClientRect().top + window.pageYOffset - 90;
+  const from = window.pageYOffset, dist = target - from, t0 = performance.now(), dur = 520;
+  let done=false;
+  (function step(now){ const k = Math.min(1,(now-t0)/dur); const e = k<.5 ? 2*k*k : 1-Math.pow(-2*k+2,2)/2;
+    window.scrollTo(0, from + dist*e); if(k<1) requestAnimationFrame(step); else done=true; })(t0);
+  setTimeout(()=>{ if(!done && Math.abs(window.pageYOffset - target) > 8) window.scrollTo(0, target); }, 380);
+  el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'), 1800); }
+document.addEventListener('click', e=>{ const a=e.target.closest('a.ticker-pill'); if(!a) return;
+  const el=document.querySelector(a.getAttribute('href')); if(!el) return;
+  e.preventDefault(); history.replaceState(null,'',a.getAttribute('href')); flashTarget(); });
+
+// Hero art setup
+const heroArt = document.getElementById('hero-art');
+if(HERO_IMAGE) {
+  const bentoEl = heroArt.querySelector('.bento');
+  if(bentoEl) {
+    bentoEl.innerHTML = `<img src="${HERO_IMAGE}" alt="" style="max-width:100%;height:auto">`;
+  }
+}
+
+const shelvesDef = [
+  {title:"旅・遠征の棚", en:"Travel & Trips", cats:["旅・遠征"]},
+  {title:"学ぶ・暮らしの棚", en:"Learning & Life", cats:["学ぶ","暮らし"]},
+  {title:"仕事・Podcastの棚", en:"Work & Podcast", cats:["仕事","Podcast"]},
+];
+const colors = ["#2fa83c","#fc5484","#9054c0","#0084cc","#e43024"];
+const shelvesEl = document.getElementById('shelves');
+let n = 0;
+shelvesEl.innerHTML = shelvesDef.map((s,si)=>{
+  const items = BOXES.filter(b=>s.cats.includes(b.cat));
+  const rid = "rail"+si;
+  const cards = items.map(b=>{
+    const c = colors[n++ % colors.length];
+    const badge = b.badge==='free' ? '<div class="pkg-badge">NEW</div>' : '';
+    const set = b.examples.slice(0,2).map(e=>e.name).join('・');
+    return `<div class="pkg" id="box-${BOXES.indexOf(b)}">
+      <div class="pkg-top" style="border-bottom-color:${c}">${badge}<img src="art/thumbs/${BOXES.indexOf(b)}.jpg" alt="" loading="lazy"></div>
+      <div class="pkg-bottom">
+        <div class="name" data-ja='${nowrapName(b)}' data-en="${b.en}">${nowrapName(b)}</div>
+        <div class="setlabel" data-ja="セット内容" data-en="What's inside">セット内容</div>
+        <div class="set">${set}</div>
+      </div>
+    </div>`;
+  }).join('');
+  return `<div class="shelf">
+    <div class="shelf-head"><h2 data-ja="${s.title}" data-en="${s.en}">${s.title}</h2>
+      <div class="arrows"><button onclick="document.getElementById('${rid}').scrollBy({left:-220,behavior:'smooth'})">←</button><button onclick="document.getElementById('${rid}').scrollBy({left:220,behavior:'smooth'})">→</button></div>
+    </div>
+    <div class="rail" id="${rid}">${cards}</div>
+  </div>`;
+}).join('');
+
+const PLIST = [
+  ["メニューの全ツール","Every tool on the menu"],
+  ["毎月の新ツール","New tools added every month"],
+  ["音声レジュメ生成キット（配布物）","Voice-memo digest kit (downloadable)"],
+  ["メニュー表の更新通知","Menu update notifications"],
+];
+document.getElementById('plist').innerHTML = PLIST.map(([ja,en])=>`<li data-ja="${ja}" data-en="${en}">${ja}</li>`).join('');
+
+const FAQ = [
+  ["解約は？","いつでも解約できます。日割りの返金はありません。","How do I cancel?","Cancel anytime. No prorated refunds."],
+  ["自分のClaudeが必要？","多くはブラウザだけで動きます。キット系は自分のClaude/Geminiで動かします。","Do I need my own Claude?","Most tools run in the browser alone. Kit-type tools run on your own Claude or Gemini."],
+  ["データはどこに？","ツールごとに明記しています。箱は共通・中身はあなたの分です。","Where is my data stored?","Each tool states this clearly. The box is shared; the contents are yours alone."],
+  ["英語でも使える？","主要ツールは日英対応です。順次拡大していきます。","Does it work in English?","Major tools support both Japanese and English, with more being added."],
+];
+document.getElementById('faqwrap').innerHTML = FAQ.map(([q,a,qe,ae])=>
+  `<details><summary data-ja="${q}" data-en="${qe}">${q}</summary><p data-ja="${a}" data-en="${ae}">${a}</p></details>`
+).join('');
+
+// CTA links follow STRIPE_LINK
+['cta-header','cta-hero','cta-pricing'].forEach(id=>{
+  const el = document.getElementById(id);
+  if(el) el.href = STRIPE_LINK;
+});
+
+// JA/EN toggle
+let currentLang = 'ja';
+function setLang(lang){
+  currentLang = lang;
+  document.getElementById('lang-ja').classList.toggle('active', lang==='ja');
+  document.getElementById('lang-en').classList.toggle('active', lang==='en');
+  document.querySelectorAll('[data-ja]').forEach(el=>{
+    el.innerHTML = lang==='ja' ? el.getAttribute('data-ja') : el.getAttribute('data-en');
+  });
+}
+
+function copyCredit(){
+  const text = document.getElementById('credit-snippet').textContent;
+  navigator.clipboard && navigator.clipboard.writeText(text);
+}
+</script>
+</body></html>

@@ -1,0 +1,5 @@
+public_tools.raw.json
+index.legacy.html
+art/thumbs/*.png
+art/thumbs/sheet.jpg
+.DS_Store
