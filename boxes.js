@@ -36,7 +36,7 @@ const BOXES = [
     {name:"ラジオ128回からおすすめ回診断",url:"https://taiken.yuukipodcast.com",note:null},
   ]},
   {box:"日程調整を|一言で終わらせる",en:"Settle a date with one question",desc:"空き時間から候補を出して発行。相手はタップするだけ",cat:"仕事",badge:"paid",examples:[
-    {name:"飲み会・打ち合わせ・収録の3プリセット",url:"https://yukitchy.github.io/itsunara/admin.html",note:null},
+    {name:"飲み会・打ち合わせ・収録の3プリセット",url:"https://yukitchy.github.io/itsunara/",note:null},
   ]},
   {box:"やる気の出ないタスクを|クエストにする",en:"Turn chores into quests",desc:"やることをクエスト受注書に変える掲示板",cat:"暮らし",badge:"paid",examples:[
     {name:"モンハン風クエスト掲示板",url:"https://yukitchy.github.io/quest-board/",note:null},
@@ -57,8 +57,8 @@ const BOXES = [
     {name:"ユウキの7番組",url:"https://program.yuukipodcast.com",note:null},
   ]},
   {box:"音声を読み物にして|後から読む",en:"Turn audio into readable pages",desc:"音声や字幕をハイライト付きの読み物に製本",cat:"Podcast",badge:"paid",examples:[
-    {name:"Podcast文庫（9番組532話）",url:"https://bunko.animesenseijp.com/be6f59d7c068/",note:null},
-    {name:"会議字幕の読み物棚",url:"https://bot.animesenseijp.com/yomimono/dana-bf662accc590/",note:null},
+    {name:"Podcast文庫（9番組532話）",url:"https://bunko.yuukipodcast.com/",note:null},
+    {name:"会議字幕の読み物棚",url:null,note:null},
   ]},
   {box:"録音から|議事録と引き継ぎ書を作る",en:"Minutes and handover docs from a recording",desc:"録音1本→まとめ→読み物。辞書と話者と立場を差し替える",cat:"仕事",badge:"paid",isKit:true,first:true,flow:{title:"ユウキの実例: 地元ラジオの収録60分 → 読み物まで",steps:[
     {t:"録音をドロップして話者を登録",d:"バーミヤンで録った60分のm4aを受付に放り込み、話者3人の名前と立場を入れて「受け付ける」。あとは待つだけ。",img:"art/flow/step1.jpg"},
