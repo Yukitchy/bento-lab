@@ -7,28 +7,28 @@
 <link rel="icon" type="image/png" sizes="32x32" href="art/motif/favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="art/motif/favicon-512.png">
 <link rel="apple-touch-icon" href="art/motif/favicon-180.png">
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700;800&family=Rubik:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#1c1c1e;--sub:#5b5b60;--white:#fff;--fog:#f6f4f1;--silver:#e3e0dc;--red:#e43024;--green:#2fa83c;--pink:#fc5484;--purple:#9054c0;--blue:#0084cc;--yellow:#ffc400;--orange:#f4761f}
 *{box-sizing:border-box}
 html,body{overflow-x:hidden}
-body{margin:0;background:var(--white);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;font-weight:400;line-height:1.7}
+body{margin:0;background:var(--white);color:var(--ink);font-family:"M PLUS 1p","Hiragino Sans",sans-serif;font-weight:400;line-height:1.7}
 a{color:inherit;text-decoration:none}
-h1,h2,h3{font-family:"Zen Kaku Gothic New";font-weight:900;letter-spacing:-.01em}
+h1,h2,h3{font-family:"M PLUS 1p";font-weight:800;letter-spacing:-.01em}
 .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
 .nw{white-space:nowrap}
 
 /* header */
-header{background:var(--ink)}
+header{background:#fff;border-bottom:1.5px solid var(--silver)}
 .hd{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1160px;margin:0 auto}
 .logo{display:flex;align-items:center;gap:10px}
-.logo .sq{width:36px;height:36px;background:var(--red);border:2.5px solid #111113;border-radius:9px;padding:4px;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr 1fr;gap:3px;box-shadow:0 0 0 1.5px rgba(255,255,255,.16)}
+.logo .sq{width:36px;height:36px;background:var(--red);border-radius:9px;padding:4px;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr 1fr;gap:3px}
 .logo .sq i{display:block;border-radius:2px}
 .logo .sq i:nth-child(1){background:#fff}
 .logo .sq i:nth-child(2){background:var(--green)}
 .logo .sq i:nth-child(3){background:var(--yellow)}
 .logo .sq i:first-child{grid-row:1 / span 2}
-.logo b{font-size:19px;color:#fff}
+.logo b{font-family:"Rubik","M PLUS 1p",sans-serif;font-size:22px;font-weight:800;color:var(--ink);letter-spacing:0}
 .btn{display:inline-block;border-radius:999px;padding:12px 24px;font-weight:700;background:var(--red);color:#fff;font-size:14px;border:none;cursor:pointer;font-family:inherit;white-space:nowrap}
 .btn:hover{background:#c8261c}
 
@@ -37,7 +37,7 @@ header{background:var(--ink)}
 .hero > .ticker-band{max-width:1080px;margin-left:auto;margin-right:auto}
 .hero .wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
 .hero-left{max-width:500px}
-.hero-left h1{font-size:clamp(40px,6vw,72px);line-height:1.28;margin:0 0 14px;font-family:"Zen Kaku Gothic New";font-weight:900}
+.hero-left h1{font-size:clamp(40px,6vw,72px);line-height:1.28;margin:0 0 14px;font-family:"M PLUS 1p";font-weight:900}
 .hero-left p{font-size:14px;color:var(--sub);margin:0 0 22px}
 .hero-right{position:relative;flex-shrink:0;margin:-40px -20px -40px 0;width:min(620px,52vw);z-index:0}
 .hero-right img{display:block;width:100%;height:auto}
@@ -69,7 +69,7 @@ a.ticker-pill:hover{background:var(--red);color:#fff}
 .bento-slot:nth-child(3){grid-area:c}
 .bento-slot:nth-child(4){grid-area:d}
 .bento-slot:nth-child(5){grid-area:e}
-.bento-badge{width:64px;height:64px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:36px;font-family:"Zen Kaku Gothic New";margin-bottom:6px}
+.bento-badge{width:64px;height:64px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:36px;font-family:"M PLUS 1p";margin-bottom:6px}
 .bento-slot:nth-child(1) .bento-badge{background:var(--blue)}
 .bento-slot:nth-child(2) .bento-badge{background:var(--orange)}
 .bento-slot:nth-child(3) .bento-badge{background:var(--yellow);color:var(--ink)}
@@ -138,9 +138,9 @@ footer .flinks a:hover{color:var(--red)}
 
 /* lang toggle */
 .head-right{display:flex;align-items:center;gap:8px}
-.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.25);border-radius:999px;overflow:hidden;flex-shrink:0}
-.lang-toggle button{border:none;background:transparent;padding:7px 13px;font-size:12px;font-weight:700;cursor:pointer;color:#fff;font-family:inherit;opacity:.6}
-.lang-toggle button.active{opacity:1;background:rgba(255,255,255,.16)}
+.lang-toggle{display:flex;border:1px solid var(--silver);border-radius:999px;overflow:hidden;flex-shrink:0}
+.lang-toggle button{border:none;background:transparent;padding:7px 13px;font-size:12px;font-weight:700;cursor:pointer;color:var(--ink);font-family:inherit;opacity:.5}
+.lang-toggle button.active{opacity:1;background:var(--fog)}
 @media(max-width:480px){
   .hd{padding:12px 14px;gap:8px}
   .logo b{font-size:15px}
