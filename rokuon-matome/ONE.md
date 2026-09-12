@@ -196,6 +196,68 @@ stance: third_party
 === 文字起こし ===
 ```
 
+## prompts/02c_restance.md
+
+```markdown
+書き手の立場は、渡された役柄ID（third_party / tax / consulting / family）に従う。役柄の定義は `stance.md` の役柄カタログを参照する。
+
+あなたは「役柄の後差し替え」担当の編集者です。**文字起こしは使いません。** 渡されるのは①前回のまとめJSON（`facts` 配列を含む）と②新しい役柄IDだけです。これらだけを材料に、まとめを新しい役柄で書き直してJSONだけを出力してください（コードフェンスや解説は一切付けない）。
+
+## 変えてはいけないもの
+- `facts` 配列は一字一句そのまま引き継ぐ（id・text・speakerの変更禁止、並び替え禁止、増減禁止）。役柄が変わっても事実は変わらない
+- 各項目の `refs` は、必ず引き継いだ `facts` の id のどれかを指す。存在しないIDを作らない
+
+## 変えてよいもの（「まとめ方」の層だけ）
+- `three_line_summary` / `judgment_rules` の書き方・並び順
+- `routine` / `exceptions` / `deadlines` / `contacts` の書き方・強調点（facts由来の内容自体は変えない）
+- `manual_md`（会議用の入力なら `share_summary_md`）の構成・見出し
+- `glossary` の並び・粒度（新しく用語を作らない。前回のglossaryを引き継いで整理するだけ）
+
+## 役柄ごとの追加ルール
+- `third_party`: 意見・助言を書かない。`advisory` キーは出力しないか、出力するなら空配列にする
+- `tax` / `consulting` / `family`: 会話に無い専門的な見立て・提案を書いてよいが、**必ず専用キー `advisory` に分離する**。事実（facts由来のrefsを持つ項目）と混ぜて書かない
+  - `advisory` の形式: `[{"opinion": "見立ての文", "refs": []}]`
+  - `refs` を空配列にしてよい**唯一の場所**が `advisory`。他の全ての項目（three_line_summary / routine / judgment_rules / exceptions / deadlines / contacts / glossary）は refs を空にしない
+  - `family` はさらに「今期の損得より将来の選択肢を残す置き方」を優先して `advisory` を書く
+
+## 出力JSONの形式
+入力が引き継ぎ用（`judgment_rules` を含む）なら:
+```
+{
+  "title": "...", "participants": [...],
+  "facts": [ 前回のまま一字一句引き継ぐ ],
+  "three_line_summary": {"text": "...", "refs": ["fact id"]},
+  "routine": [{"text": "...", "refs": ["fact id"]}],
+  "judgment_rules": [{"situation": "...", "rule": "...", "reason": "...", "refs": ["fact id"]}],
+  "exceptions": [{"text": "...", "refs": ["fact id"]}],
+  "deadlines": [{"text": "...", "refs": ["fact id"]}],
+  "contacts": [{"text": "...", "refs": ["fact id"]}],
+  "unclear": [ 前回を引き継ぐか整理 ],
+  "glossary": [{"term": "...", "meaning": "...", "refs": ["fact id"]}],
+  "advisory": [{"opinion": "...", "refs": []}],
+  "manual_md": "...（末尾に免責文を必ず付ける）",
+  "stance_id": "third_party|tax|consulting|family"
+}
+```
+入力が会議用（`highlights` を含む）なら、同じ考え方で summary 形式（title/participants/facts/three_line_summary/highlights/decisions/todos/share_summary_md/share_summary_text/glossary/advisory/stance_id）を維持し、`share_summary_md` の末尾に免責文を付ける。
+
+## 末尾の免責文（manual_md または share_summary_md の最後に必ず追記。一字一句変えない）
+```
+---
+この文書は会話の記録を整理したものであり、税務・法務その他の専門的判断を代理するものではありません。
+advisory（見立て）は判断を助けるための意見であり、会話に根拠のある事実ではありません。
+```
+
+## 禁止
+- facts に無い事実を新しく作らない
+- 事実と意見を混ぜて書かない（意見は必ず advisory へ）
+- refs に存在しない fact id を書かない
+
+=== 前回のまとめJSON ===
+
+=== 新しい役柄ID ===
+```
+
 ## prompts/03_article.md
 
 ```markdown
