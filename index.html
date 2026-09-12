@@ -116,17 +116,26 @@ a.ticker-pill:hover{background:var(--red);color:#fff}
 .pkg-bottom .set{font-size:11px;color:var(--sub);line-height:1.6}
 
 /* pricing */
-.pricing{padding:60px 24px;background:var(--fog)}
-.pricepkg{max-width:420px;margin:0 auto;background:#fff;border-radius:8px;border:1px solid var(--silver);padding:36px 28px;text-align:center;position:relative}
+.pricing{padding:60px clamp(20px,3.2vw,48px);background:var(--fog)}
+.pricegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:860px;margin:0 auto;align-items:stretch}
+@media(max-width:720px){.pricegrid{grid-template-columns:1fr}}
+.pricepkg{background:#fff;border-radius:10px;border:1px solid var(--silver);padding:32px 26px 28px;text-align:center;position:relative;display:flex;flex-direction:column}
+.pricepkg.main{border:2px solid var(--ink)}
 .ribbon{position:absolute;top:-14px;left:24px;background:var(--yellow);color:var(--ink);font-weight:900;font-size:12px;padding:6px 16px;border-radius:0}
-.pricepkg .num{font-size:52px;font-weight:900;display:block}
+.ribbon.plain{background:var(--silver)}
+.ptitle{font-size:15px;font-weight:800;margin:0 0 2px}
+.psub{font-size:12.5px;color:var(--sub);margin:0 0 14px;min-height:36px}
+.pricepkg .num{font-size:52px;font-weight:900;display:block;line-height:1.1}
 .pricepkg .num small{font-size:18px;font-weight:700}
-.plist{list-style:none;padding:0;margin:20px 0 26px;text-align:left;font-size:13.5px;color:var(--sub)}
+.plist{list-style:none;padding:0;margin:20px 0 24px;text-align:left;font-size:13.5px;color:var(--sub);flex:1}
 .plist li{padding:8px 0;border-top:1px solid var(--silver)}
 .plist li:before{content:"・"}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{background:var(--fog)}
 
 /* faq */
-.faq{padding:20px 24px 64px;max-width:760px;margin:0 auto}
+.faq{padding:8px clamp(20px,3.2vw,48px) 72px;max-width:1600px;margin:0 auto}
+.faq h2,#faqwrap{max-width:860px}
 .faq h2{font-size:22px;margin-bottom:16px}
 details{background:#fff;border:1px solid var(--silver);border-radius:8px;padding:16px 20px;margin-bottom:10px}
 summary{cursor:pointer;font-weight:700;font-size:14.5px}
@@ -151,7 +160,7 @@ footer .flinks a:hover{color:var(--red)}
 }
 
 /* hako 3card */
-.hako{padding:20px clamp(20px,3.2vw,48px) 8px;max-width:1600px;margin:0 auto}
+.hako{padding:56px clamp(20px,3.2vw,48px) 8px;max-width:1600px;margin:0 auto}
 .hako h2{font-size:22px;margin:0 0 18px}
 .three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:700px){.three{grid-template-columns:1fr}}
@@ -160,9 +169,10 @@ footer .flinks a:hover{color:var(--red)}
 .hcard p{color:var(--sub);font-size:13px;margin:0}
 
 /* credit */
-.credit{padding:8px 24px 44px;max-width:760px;margin:0 auto}
-.credit h2{font-size:22px;margin:0 0 10px}
-.credit > p{color:var(--sub);font-size:13.5px;margin:0 0 16px}
+.credit{padding:56px clamp(20px,3.2vw,48px) 48px;max-width:1600px;margin:0 auto}
+.credit h2,.credit > p,.credit-box{max-width:860px}
+.credit h2{font-size:22px;margin:0 0 12px}
+.credit > p{color:var(--sub);font-size:13.5px;margin:0 0 20px}
 .credit-box{background:var(--fog);border:1px solid var(--silver);border-radius:8px;padding:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .credit-box code{flex:1;min-width:0;font-size:12.5px;background:#fff;padding:9px 12px;border-radius:6px;overflow-x:auto;white-space:nowrap;border:1px solid var(--silver)}
 .credit-copy{border:none;background:var(--ink);color:#fff;border-radius:999px;padding:9px 16px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
@@ -245,12 +255,28 @@ footer .flinks a:hover{color:var(--red)}
 </div>
 
 <div class="pricing" id="pricing">
-  <div class="pricepkg">
-    <div class="ribbon">NEW</div>
-    <span class="num">¥500 <small data-ja="/月" data-en="/mo">/月</small></span>
-    <ul class="plist" id="plist"></ul>
-    <a class="btn" id="cta-pricing" href="#pricing" data-ja="¥500/月ではじめる" data-en="Start — ¥500/mo">¥500/月ではじめる</a>
-    <p class="price-note" style="font-size:12px;color:var(--sub);margin-top:16px" data-ja="いつでも解約できます。商用利用OK・ただしクレジット表記が必要（下記）" data-en="Cancel anytime. Commercial use OK — a credit line is required (see below).">いつでも解約できます。商用利用OK・ただしクレジット表記が必要（下記）</p>
+  <div class="pricegrid">
+
+    <div class="pricepkg">
+      <div class="ribbon plain" data-ja="お試し" data-en="FREE">お試し</div>
+      <p class="ptitle" data-ja="無料で試す" data-en="Try for free">無料で試す</p>
+      <p class="psub" data-ja="登録なし。5つの箱はそのまま開いて使えます。" data-en="No sign-up. Five of the boxes are open to everyone.">登録なし。5つの箱はそのまま開いて使えます。</p>
+      <span class="num" data-ja="¥0" data-en="¥0">¥0</span>
+      <ul class="plist" id="plist-free"></ul>
+      <a class="btn ghost" href="#shelves" data-ja="無料の箱を見る" data-en="See the free boxes">無料の箱を見る</a>
+      <p class="price-note" style="font-size:12px;color:var(--sub);margin-top:16px" data-ja="メニューの黄色い NEW バッジが無料で試せる箱です" data-en="Boxes with the yellow NEW badge on the menu are free to try.">メニューの黄色い NEW バッジが無料で試せる箱です</p>
+    </div>
+
+    <div class="pricepkg main">
+      <div class="ribbon" data-ja="定期便" data-en="SUBSCRIPTION">定期便</div>
+      <p class="ptitle" data-ja="Bento Lab 定期便" data-en="Bento Lab subscription">Bento Lab 定期便</p>
+      <p class="psub" data-ja="全部の箱と、毎月増える新しい箱。あなた用の中身も作れます。" data-en="Every box, plus the new ones each month — and a version filled with your own data.">全部の箱と、毎月増える新しい箱。あなた用の中身も作れます。</p>
+      <span class="num">¥500 <small data-ja="/月" data-en="/mo">/月</small></span>
+      <ul class="plist" id="plist"></ul>
+      <a class="btn" id="cta-pricing" href="#pricing" data-ja="¥500/月ではじめる" data-en="Start — ¥500/mo">¥500/月ではじめる</a>
+      <p class="price-note" style="font-size:12px;color:var(--sub);margin-top:16px" data-ja="いつでも解約できます。商用利用OK・ただしクレジット表記が必要（下記）" data-en="Cancel anytime. Commercial use OK — a credit line is required (see below).">いつでも解約できます。商用利用OK・ただしクレジット表記が必要（下記）</p>
+    </div>
+
   </div>
 </div>
 
@@ -400,6 +426,14 @@ const PLIST = [
   ["メニュー表の更新通知","Menu update notifications"],
 ];
 document.getElementById('plist').innerHTML = PLIST.map(([ja,en])=>`<li data-ja="${ja}" data-en="${en}">${ja}</li>`).join('');
+const FREE_N = BOXES.filter(b=>b.badge==='free').length;
+const PLIST_FREE = [
+  [`無料で開ける箱 ${FREE_N}つ`, `${FREE_N} boxes, open to everyone`],
+  ["登録もカードも不要","No sign-up, no card"],
+  ["キットの配布はなし","The downloadable kit is not included"],
+  ["あなた用の中身は作れません","No version filled with your own data"],
+];
+document.getElementById('plist-free').innerHTML = PLIST_FREE.map(([ja,en])=>`<li data-ja="${ja}" data-en="${en}">${ja}</li>`).join('');
 
 const FAQ = [
   ["解約は？","いつでも解約できます。日割りの返金はありません。","How do I cancel?","Cancel anytime. No prorated refunds."],
