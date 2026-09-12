@@ -1,6 +1,6 @@
 // Bento Lab の箱データ（index.html と box.html で共用）
 // Stripeの支払いリンクが出来たらここを書き換える
-const STRIPE_LINK = "#pricing";
+const STRIPE_LINK = "https://buy.stripe.com/aFa6oI2l56Z1a6q00RcjS0b";
 
 const BOXES = [
   {box:"好きな作品で|語学を続ける",en:"Keep up a language with what you love",desc:"好きな作品のセリフでAB再生・録音・発音練習",cat:"学ぶ",badge:"free",featured:true,heroChar:"語",examples:[
