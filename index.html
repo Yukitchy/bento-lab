@@ -33,13 +33,13 @@ header{background:#fff;border-bottom:1.5px solid var(--silver)}
 .btn:hover{background:#c8261c}
 
 /* hero */
-.hero{background:var(--white);padding:64px 24px 0;position:relative;overflow:hidden}
-.hero > .ticker-band{max-width:1080px;margin-left:auto;margin-right:auto}
-.hero .wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.hero{background:var(--white);padding:40px 24px 0;position:relative;overflow:hidden}
+.hero > .ticker-band{max-width:1112px;margin-left:auto;margin-right:auto}
+.hero .wrap{display:flex;align-items:center;justify-content:space-between;gap:40px}
 .hero-left{max-width:500px}
 .hero-left h1{font-size:clamp(40px,6vw,72px);line-height:1.28;margin:0 0 14px;font-family:"M PLUS 1p";font-weight:900}
 .hero-left p{font-size:14px;color:var(--sub);margin:0 0 22px}
-.hero-right{position:relative;flex-shrink:0;margin:-24px 0 0;width:min(600px,50vw);z-index:0}
+.hero-right{position:relative;flex-shrink:0;margin:0;width:min(600px,50vw);z-index:0}
 .hero-right img{display:block;width:100%;height:auto}
 .hero-left{position:relative;z-index:1}
 
@@ -101,7 +101,7 @@ a.ticker-pill:hover{background:var(--red);color:#fff}
 .arrows{display:flex;gap:8px}
 .arrows button{width:34px;height:34px;border-radius:999px;border:1px solid var(--silver);background:#fff;cursor:pointer;font-size:14px;font-weight:900;color:var(--ink)}
 .arrows button:hover{background:var(--fog)}
-.rail{display:flex;gap:16px;overflow-x:auto;padding:6px 24px 14px;scroll-behavior:smooth}
+.rail{display:flex;gap:16px;overflow-x:auto;padding:6px 24px 14px;padding-left:max(24px,calc((100% - 1160px)/2 + 24px));scroll-behavior:smooth}
 .rail::-webkit-scrollbar{height:8px}
 .rail::-webkit-scrollbar-thumb{background:var(--silver);border-radius:8px}
 .pkg{flex:none;width:190px;background:#fff;border-radius:8px;overflow:hidden;border:1px solid var(--silver);cursor:pointer;transition:transform .15s,box-shadow .15s}
