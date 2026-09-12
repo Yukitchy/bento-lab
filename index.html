@@ -332,7 +332,8 @@ const BOXES = [
     {name:"Podcast文庫（9番組532話）",url:"https://bunko.animesenseijp.com/be6f59d7c068/",note:null},
     {name:"会議字幕の読み物棚",url:"https://bot.animesenseijp.com/yomimono/dana-bf662accc590/",note:null},
   ]},
-  {box:"録音から|議事録と引き継ぎ書を作る",en:"Minutes and handover docs from a recording",desc:"録音1本→まとめ→読み物。辞書と話者と立場を差し替える",cat:"仕事",badge:"paid",isKit:true,examples:[
+  {box:"録音から|議事録と引き継ぎ書を作る",en:"Minutes and handover docs from a recording",desc:"録音1本→まとめ→読み物。辞書と話者と立場を差し替える",cat:"仕事",badge:"paid",isKit:true,first:true,examples:[
+    {name:"音声レジュメ生成キット（配布物）",url:null,note:null},
     {name:"書き手の立場＝税務",url:null,note:null},
     {name:"コンサル",url:null,note:null},
     {name:"第三者（既定）",url:null,note:null},
@@ -427,11 +428,11 @@ const colors = ["#2fa83c","#fc5484","#9054c0","#0084cc","#e43024"];
 const shelvesEl = document.getElementById('shelves');
 let n = 0;
 shelvesEl.innerHTML = shelvesDef.map((s,si)=>{
-  const items = BOXES.filter(b=>s.cats.includes(b.cat));
+  const items = BOXES.filter(b=>s.cats.includes(b.cat)).sort((a,b)=>(b.first?1:0)-(a.first?1:0));
   const rid = "rail"+si;
   const cards = items.map(b=>{
     const c = colors[n++ % colors.length];
-    const badge = b.badge==='free' ? '<div class="pkg-badge">NEW</div>' : '';
+    const badge = b.badge==='free'||b.first ? '<div class="pkg-badge">NEW</div>' : '';
     const set = b.examples.slice(0,2).map(e=>e.name).join('・');
     return `<div class="pkg" id="box-${BOXES.indexOf(b)}">
       <div class="pkg-top" style="border-bottom-color:${c}">${badge}<img src="art/thumbs/${BOXES.indexOf(b)}.jpg" alt="" loading="lazy"></div>
