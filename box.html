@@ -1,0 +1,60 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bento Lab</title>
+<link rel="icon" type="image/png" sizes="32x32" href="art/motif/favicon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1c1c1e;--sub:#5b5b60;--fog:#f6f4f1;--silver:#e3e0dc;--red:#e43024;--green:#2fa83c;--pink:#fc5484;--purple:#9054c0;--blue:#0084cc;--yellow:#ffc400}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;line-height:1.7}
+a{color:inherit;text-decoration:none}h1,h2{font-weight:900;letter-spacing:-.01em}.nw{white-space:nowrap}
+header{background:var(--ink)}.hd{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1160px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:10px}.logo .sq{width:36px;height:36px;background:var(--red);border:2.5px solid #111113;border-radius:9px;padding:4px;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr 1fr;gap:3px}
+.logo .sq i{display:block;border-radius:2px}.logo .sq i:nth-child(1){background:#fff;grid-row:1/span 2}.logo .sq i:nth-child(2){background:var(--green)}.logo .sq i:nth-child(3){background:var(--pink)}.logo b{font-size:19px;color:#fff}
+.btn{display:inline-block;border-radius:999px;padding:12px 24px;font-weight:700;background:var(--red);color:#fff;font-size:14px;white-space:nowrap}.btn:hover{background:#c8261c}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}.btn.ghost:hover{background:var(--fog)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+.crumb{display:inline-block;margin:28px 0 20px;font-size:13px;color:var(--sub)}.crumb:hover{color:var(--ink)}
+.top{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:40px;align-items:center}
+@media(max-width:720px){.top{grid-template-columns:1fr;gap:20px}}
+.art{border-radius:12px;overflow:hidden;border:1px solid var(--silver);border-bottom:6px solid;background:var(--fog)}.art img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.tag{display:inline-block;background:var(--yellow);font-size:11px;font-weight:900;padding:4px 10px;letter-spacing:.04em;margin-bottom:14px}
+h1{font-size:clamp(22px,4.5vw,34px);line-height:1.25;margin:0 0 6px}.en{color:var(--sub);font-size:14px;margin:0 0 16px}.desc{font-size:16px;margin:0 0 24px}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+section{margin-top:56px}h2{font-size:20px;margin:0 0 14px}
+.ex{border-top:1px solid var(--silver)}.ex .row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--silver)}
+.ex .row b{font-size:15px}.ex .row small{display:block;color:var(--sub);font-size:12px}.ex .row .sp{flex:1}
+.ex .row .open{font-size:12px;font-weight:700;border:1.5px solid var(--ink);border-radius:999px;padding:6px 14px}.ex .row .open:hover{background:var(--ink);color:#fff}
+.ex .row .priv{font-size:12px;color:var(--sub)}
+.kit{background:var(--fog);border-radius:12px;padding:20px 24px}.kit ul{margin:8px 0 0;padding-left:20px;font-size:14px}.kit ul li{padding:3px 0}
+.note{background:var(--fog);border-radius:12px;padding:20px 24px;font-size:14px}
+footer{margin-top:80px;padding:28px 24px;border-top:1px solid var(--silver);font-size:12px;color:var(--sub);text-align:center}
+</style></head><body>
+<header><div class="hd"><a class="logo" href="index.html"><span class="sq"><i></i><i></i><i></i></span><b>Bento Lab</b></a><a class="btn" id="cta-header" href="index.html#pricing">¥500/月ではじめる</a></div></header>
+<div class="wrap">
+<a class="crumb" href="index.html#shelves">← メニューにもどる</a>
+<div id="app"></div>
+</div>
+<footer>© 2026 Bento Lab</footer>
+<script src="boxes.js"></script>
+<script>
+const i = Math.max(0, Math.min(BOXES.length-1, parseInt(new URLSearchParams(location.search).get('b')||'0',10)||0));
+const b = BOXES[i]; const colors=["#2fa83c","#fc5484","#9054c0","#0084cc","#e43024"]; const color=colors[i%colors.length];
+const name = b.box.replace(/\|/g,''); document.title = name + " — Bento Lab";
+const pay = STRIPE_LINK.startsWith('#') ? 'index.html'+STRIPE_LINK : STRIPE_LINK;
+document.getElementById('cta-header').href = pay;
+const tag = b.isKit ? "定期便に含まれる" : b.badge==='free' ? "無料で試せる" : "定期便で使える";
+const firstUrl = (b.examples.find(e=>e.url)||{}).url;
+const tryBtn = b.badge==='free' && firstUrl ? `<a class="btn ghost" href="${firstUrl}" target="_blank" rel="noopener">無料で試す ↗</a>` : '';
+const rows = b.examples.map(e=>`<div class="row"><div><b>${e.name}</b>${e.note?`<small>${e.note}</small>`:''}</div><span class="sp"></span>${e.url?`<a class="open" href="${e.url}" target="_blank" rel="noopener">開く ↗</a>`:`<span class="priv">個別版・非公開</span>`}</div>`).join('');
+const kit = b.isKit ? `<section><h2>セットの中身（zipで渡します）</h2><div class="kit">録音ファイルを、あなたのClaude/Geminiで「まとめ」「引き継ぎ書」「読み物」に変えるための一式。ユウキ専用の設定は抜いてあり、辞書と話者と立場を差し替えるだけで自分用になります。
+<ul><li>README（手順書）と START（AIに貼る起動プロンプト）</li><li>プロンプト5本: 文字起こし／まとめ／引き継ぎ書（判断基準の抽出）／記事化／検品</li><li>固有名詞辞書テンプレ（CSV）と話者・立場の設定ファイル</li><li>検品スクリプト（辞書置換＋チェック・追加インストール不要）</li></ul>
+<p style="margin:14px 0 0;font-size:13px;color:var(--sub)">受け取り方: お申し込み後、Messengerかメールでzipをお送りします。更新版が出たら同じ経路で届きます。</p></div></section>` : '';
+document.getElementById('app').innerHTML = `
+<div class="top">
+  <div class="art" style="border-bottom-color:${color}"><img src="art/thumbs/${i}.jpg" alt=""></div>
+  <div><span class="tag">${tag}</span><h1>${b.box.split('|').map(t=>`<span class="nw">${t}</span>`).join(' ')}</h1><p class="en">${b.en}</p><p class="desc">${b.desc}</p>
+    <div class="ctas">${tryBtn}<a class="btn" href="${pay}">¥500/月ではじめる</a></div></div>
+</div>
+${kit}
+<section><h2>この箱の中身の例</h2><p style="margin:0 0 12px;font-size:13px;color:var(--sub)">同じ箱に、違う中身（作品・場所・辞書・立場）を入れた例。あなた用の中身も同じ箱で作れます。</p><div class="ex">${rows}</div></section>
+<section><div class="note"><b>自分用の中身がほしい時</b><br>お申し込み後にMessengerでひとこと。辞書・話者・作品など「あなた用の中身」を入れた版を、この箱で作ります。</div></section>`;
+</script></body></html>
