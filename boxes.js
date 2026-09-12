@@ -60,7 +60,10 @@ const BOXES = [
     {name:"Podcast文庫（9番組532話）",url:"https://bunko.animesenseijp.com/be6f59d7c068/",note:null},
     {name:"会議字幕の読み物棚",url:"https://bot.animesenseijp.com/yomimono/dana-bf662accc590/",note:null},
   ]},
-  {box:"録音から|議事録と引き継ぎ書を作る",en:"Minutes and handover docs from a recording",desc:"録音1本→まとめ→読み物。辞書と話者と立場を差し替える",cat:"仕事",badge:"paid",isKit:true,first:true,examples:[
+  {box:"録音から|議事録と引き継ぎ書を作る",en:"Minutes and handover docs from a recording",desc:"録音1本→まとめ→読み物。辞書と話者と立場を差し替える",cat:"仕事",badge:"paid",isKit:true,first:true,flow:{title:"ユウキの実例: 地元ラジオの収録60分 → 読み物まで",steps:[
+    {t:"録音をドロップして話者を登録",d:"バーミヤンで録った60分のm4aを受付に放り込み、話者3人の名前と立場を入れて「受け付ける」。あとは待つだけ。",img:"art/flow/step1.jpg"},
+    {t:"まとめが自動で出る",d:"3行サマリー・ハイライト・決定事項・TODO・出たアイデアまで1枚に。LINEに直貼りできるテキスト版も同時に出る。",img:"art/flow/step2.jpg"},
+    {t:"対談の読み物ページになる",d:"同じ録音が、見出し付きのインタビュー記事に。参加者に送れば「あの話どこだっけ」が無くなる。",img:"art/flow/step3.jpg"}]},examples:[
     {name:"音声レジュメ生成キット（配布物）",url:null,note:null},
     {name:"書き手の立場＝税務",url:null,note:null},
     {name:"コンサル",url:null,note:null},
